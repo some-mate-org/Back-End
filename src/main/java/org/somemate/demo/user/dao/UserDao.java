@@ -9,4 +9,3 @@ import java.sql.SQLException;
 public interface UserDao {
     User getTestUser() throws SQLException;
 }
-// test
