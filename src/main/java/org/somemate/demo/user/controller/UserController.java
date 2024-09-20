@@ -49,8 +49,8 @@ public class UserController {
 
     // 사용자 로그인을 위한 엔드포인트, 성공 시 토큰 반환
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestParam String userID, @RequestParam String password) throws SQLException {
-        String token = userService.loginUser(userID, password);
+    public ResponseEntity<?> loginUser(@RequestParam String user_ID, @RequestParam String password) throws SQLException {
+        String token = userService.loginUser(user_ID, password);
         if (token != null) {
             return ResponseEntity.ok(token);
         } else {
@@ -80,14 +80,13 @@ public class UserController {
         }
     }
 
-    // 사용자 정보를 업데이트하는 엔드포인트
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable int id, @RequestBody User user) throws SQLException {
-        boolean isUpdated = userService.updateUser(id, user);
-        if (isUpdated) {
-            return ResponseEntity.ok("유저 정보 업데이트 성공");
+    @GetMapping("/check-username/{id}")
+    public ResponseEntity<?> checkUsernameAvailability(@PathVariable String user_ID) throws SQLException {
+        boolean isAvailable = userService.checkUserID(user_ID);
+        if (isAvailable) {
+            return ResponseEntity.ok().body("아이디 사용 가능");
         } else {
-            return ResponseEntity.badRequest().body("업데이트 실패");
+            return ResponseEntity.badRequest().body("이미 사용 중인 아이디입니다");
         }
     }
 }

@@ -22,9 +22,6 @@ public interface UserDao {
     // ID로 사용자를 찾는 메서드
     User findById(@Param("id") int id) throws SQLException;
 
-    // 사용자 정보를 업데이트하는 메서드
-    boolean updateUser(@Param("id") int id, @Param("user") User user) throws SQLException;
-
     // 사용자 RefreshToken를 삭제하는 메서드
     boolean deleteRefreshToken(String refreshToken) throws SQLException;
 

@@ -57,8 +57,8 @@ public class UserServiceImp implements UserService {
 
     // 사용자 로그인과 토큰 생성
     @Override
-    public String loginUser(String userID, String password) throws SQLException {
-        User user = userDao.findByNameAndPassword(userID, password);
+    public String loginUser(String user_ID, String password) throws SQLException {
+        User user = userDao.findByNameAndPassword(user_ID, password);
         if (user != null) {
             String encryptedPassword = encryptPassword(password);
             if (encryptedPassword.equals(user.getPassword())) {
@@ -98,9 +98,8 @@ public class UserServiceImp implements UserService {
         return userDao.findById(id);
     }
 
-    // 사용자 정보를 업데이트 (설문조사 후 MBTI 업데이트)
     @Override
-    public boolean updateUser(int id, User user) throws SQLException {
-        return userDao.updateUser(id, user);
+    public boolean checkUserID(String user_ID) throws SQLException{
+        return userDao.existsByUserID(user_ID);
     }
 }

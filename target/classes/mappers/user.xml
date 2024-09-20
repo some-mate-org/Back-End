@@ -5,8 +5,43 @@
 <mapper namespace="org.somemate.demo.user.dao.UserDao">
 
     <select id="getTestUser" resultType="org.somemate.demo.user.dto.User">
-        select idx, openchat_link, name, password, mbti, age, gender, profile, refreshToken
-        from users
+        select idx, openchat_link, name, password, mbti, age, gender, profile
+        from user
         where idx=1
     </select>
+
+    <select id="existsByUserID" resultType="boolean">
+        SELECT EXISTS(
+            SELECT 1 FROM user WHERE user_ID = #{user_ID}
+        )
+    </select>
+
+    <select id="saveUser" resultType="org.somemate.demo.user.dto.User">
+        select idx,
+               openchat_link,
+               name,
+               user_ID,
+               password,
+               mbti,
+               age,
+               gender,
+               profile,
+#                refreshToken
+        from user
+        where idx = 1
+    </select>
+
+    <update id="updateUser">
+        UPDATE user
+        SET name=#{name},
+            openchat_link=#{openChatLink},
+            user_id=#{user_id},
+            password=#{password},
+            mbti=#{mbti},
+            age=#{age},
+            gender=#{gender},
+            profile=#{profile}
+        WHERE idx = #{idx}
+    </update>
+
 </mapper>

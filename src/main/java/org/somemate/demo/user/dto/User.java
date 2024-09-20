@@ -4,7 +4,7 @@ public class User {
     private int idx;
     private String openChatLink;
     private String name;
-    private String userID;
+    private String user_ID;
     private String password;
     private String mbti;
     private String refreshToken;
@@ -47,11 +47,11 @@ public class User {
     }
 
     public String getUserID() {
-        return userID;
+        return user_ID;
     }
 
     public void setUserID(String userID) {
-        this.userID = userID;
+        this.user_ID = userID;
     }
 
     public String getPassword() {
@@ -112,7 +112,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [idx=" + idx + ", openChatLink=" + openChatLink + ", name=" + name + ", userID=" + userID + ", refreshToken=" + refreshToken + ", gender=" + gender + ", profile=" + profile + ", age=" + age + "]";
+        return "User [idx=" + idx + ", openChatLink=" + openChatLink + ", name=" + name + ", user_ID=" + user_ID + ", refreshToken=" + refreshToken + ", gender=" + gender + ", profile=" + profile + ", age=" + age + "]";
     }
 
 }
