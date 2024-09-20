@@ -53,6 +53,12 @@ public class UserController {
         }
     }
 
+    @GetMapping("/checkUserId")
+    public ResponseEntity<Boolean> checkUserId(@RequestParam String userId)throws SQLException {
+        boolean isAvailable = userService.isUserIdAvailable(userId);
+        return new ResponseEntity<>(isAvailable, HttpStatus.OK);
+    }
+
 
 //    @GetMapping
 //    @RequestMapping("/getMatchedUserInfo/{userIdx}")

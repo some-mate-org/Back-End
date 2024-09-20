@@ -63,4 +63,7 @@ public class UserServiceImp implements UserService {
         return userDao.getMatchedUserInfo(map);
     }
 
+    public boolean isUserIdAvailable(String userId) {
+        return !userDao.existsByUserId(userId);
+    }
 }

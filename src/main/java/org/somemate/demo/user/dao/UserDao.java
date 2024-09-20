@@ -21,4 +21,6 @@ public interface UserDao {
     RecommendedUser getMatchedUserInfo(Map<String, Object> map) throws SQLException;
 
     int existsByUserID(String userID)throws SQLException;
+
+    boolean existsByUserId(String userId);
 }

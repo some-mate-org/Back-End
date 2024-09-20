@@ -51,10 +51,11 @@
         ;
     </select>
 
-    <select id="existsByUserID" resultType="int">
+    <!-- user_id 중복 확인을 위한 쿼리 -->
+    <select id="existsByUserId" resultType="boolean" parameterType="String">
         SELECT COUNT(1)
         FROM user
-        WHERE user_id = #{user_id}
+        WHERE user_id = #{userId}
     </select>
 
     <!-- 사용자 정보 저장 (INSERT) -->

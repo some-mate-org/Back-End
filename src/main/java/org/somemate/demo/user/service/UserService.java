@@ -16,4 +16,6 @@ public interface UserService {
     RecommendedUser getMatchedUserInfo(Map<String, Object> map) throws SQLException;
 
     void registerUser(User user)throws SQLException;
+
+    boolean isUserIdAvailable(String userId)throws SQLException;
 }
