@@ -4,7 +4,7 @@ public class User {
     private int idx;
     private String openChatLink;
     private String name;
-    private String user_ID;
+    private String userID;
     private String password;
     private String mbti;
     private String refreshToken;
@@ -17,7 +17,7 @@ public class User {
 //        this.password = password;
 //    }
 
-    public User(int idx, String openchat_link, String name, String password, String mbti, int age, int gender, String profile, String refreshToken) {
+    public User(int idx, String openchat_link, String name, String userID, String password, String mbti, int age, int gender, String profile, String refreshToken) {
         this.idx = idx;
         this.openChatLink = openchat_link;
         this.name = name;
@@ -27,6 +27,8 @@ public class User {
         this.profile = profile;
         this.age = age;
         this.mbti = mbti;
+        this.userID = userID;
+
     }
 
     public int getIdx() {
@@ -47,11 +49,11 @@ public class User {
     }
 
     public String getUserID() {
-        return user_ID;
+        return userID;
     }
 
     public void setUserID(String userID) {
-        this.user_ID = userID;
+        this.userID = userID;
     }
 
     public String getPassword() {
@@ -112,7 +114,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [idx=" + idx + ", openChatLink=" + openChatLink + ", name=" + name + ", user_ID=" + user_ID + ", refreshToken=" + refreshToken + ", gender=" + gender + ", profile=" + profile + ", age=" + age + "]";
+        return "User [idx=" + idx + ", openChatLink=" + openChatLink + ", name=" + name + ", userID=" + userID + ", refreshToken=" + refreshToken + ", gender=" + gender + ", profile=" + profile + ", age=" + age + "]";
     }
 
 }

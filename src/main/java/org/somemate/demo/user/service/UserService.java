@@ -1,8 +1,10 @@
 package org.somemate.demo.user.service;
 
+import org.somemate.demo.user.dto.RecommendedUser;
 import org.somemate.demo.user.dto.User;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 public interface UserService {
     User getTestUser() throws SQLException;
@@ -20,4 +22,10 @@ public interface UserService {
     User getUserById(int id) throws SQLException;
 
     boolean checkUserID(String user_ID) throws SQLException;
+
+    String getUserMBTI(int userIdx) throws SQLException;
+
+    RecommendedUser getMatchedUserInfo(Map<String, Object> map) throws SQLException;
+
+    int updateUserMbti(User user) throws SQLException;
 }

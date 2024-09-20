@@ -2,9 +2,11 @@ package org.somemate.demo.user.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.somemate.demo.user.dto.RecommendedUser;
 import org.somemate.demo.user.dto.User;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 @Mapper
 public interface UserDao {
@@ -24,5 +26,11 @@ public interface UserDao {
 
     // 사용자 RefreshToken를 삭제하는 메서드
     boolean deleteRefreshToken(String refreshToken) throws SQLException;
+
+    String getUserMBTI(int userIdx) throws SQLException;
+
+    RecommendedUser getMatchedUserInfo(Map<String, Object> map) throws SQLException;
+
+    int updateUserMbti(User user) throws SQLException;
 
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.somemate.demo.mbti.dao.MbtiDao">
+    <select id="getMbtiInfo" parameterType="string" resultType="org.somemate.demo.mbti.dto.Mbti">
+        select my_mbti, title, `desc` from mbti where my_mbti=#{mbti}
+    </select>
+</mapper>

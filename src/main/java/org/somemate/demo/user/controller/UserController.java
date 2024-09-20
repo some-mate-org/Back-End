@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.somemate.demo.user.service.UserService;
-import org.somemate.demo.user.dto.User;
+import org.somemate.demo.user.dto.RecommendedUser;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
@@ -20,6 +21,8 @@ import java.sql.SQLException;
 public class UserController {
     UserService userService;
     JWTUtil jwtUtil;
+    User user;
+    RecommendedUser recommendedUser;
 
 
     public UserController(UserService userService, JWTUtil jwtUtil) {
@@ -30,14 +33,15 @@ public class UserController {
     @GetMapping
     @RequestMapping("/test")
     public User test() {
-        User user;
 
         try {
             user = userService.getTestUser();
             System.out.println("user service : " + user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            user = null;
         }
-        catch (SQLException e) {e.printStackTrace(); user = null;}
-    return user;
+        return user;
     }
 
     // 사용자 등록
@@ -88,5 +92,37 @@ public class UserController {
         } else {
             return ResponseEntity.badRequest().body("이미 사용 중인 아이디입니다");
         }
+    }
+
+    @GetMapping
+    @RequestMapping("/getMatchedUserInfo/{userIdx}")
+    public RecommendedUser getMatchedUserInfo(@PathVariable int userIdx) throws SQLException
+    {
+        try {
+            String mbti = userService.getUserMBTI(userIdx);
+            System.out.println("mbti : " + mbti);
+            Map<String, Object> map = new HashMap<>();
+            map.put("userIdx", userIdx);
+            map.put("mbti", mbti);
+
+            recommendedUser = userService.getMatchedUserInfo(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return recommendedUser;
+    }
+
+    @PatchMapping("/updateUserMbti")
+    public int updateUserMbti(@RequestBody User user) throws SQLException {
+        int result = -1;
+        System.out.println("user : " + user.toString());
+        try {
+            result = userService.updateUserMbti(user);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

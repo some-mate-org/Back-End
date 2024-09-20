@@ -1,6 +1,7 @@
 package org.somemate.demo.user.service;
 
 import org.somemate.demo.user.dao.UserDao;
+import org.somemate.demo.user.dto.RecommendedUser;
 import org.somemate.demo.user.dto.User;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Map;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -101,5 +103,21 @@ public class UserServiceImp implements UserService {
     @Override
     public boolean checkUserID(String user_ID) throws SQLException{
         return userDao.existsByUserID(user_ID);
+    }
+
+    @Override
+    public String getUserMBTI(int userIdx) throws SQLException {
+        return userDao.getUserMBTI(userIdx);
+    }
+
+
+    @Override
+    public RecommendedUser getMatchedUserInfo(Map<String, Object> map) throws SQLException {
+        return userDao.getMatchedUserInfo(map);
+    }
+
+    @Override
+    public int updateUserMbti(User user) throws SQLException{
+        return userDao.updateUserMbti(user);
     }
 }
