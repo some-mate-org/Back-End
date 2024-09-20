@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.somemate.demo.question.dao.QuestionDao">
+
+    <!-- 질문 ID로 질문 정보 조회 -->
+    <select id="getQuestionById" parameterType="int" resultType="org.somemate.demo.question.dto.Question">
+        SELECT idx, question1_title, question2_title, answer1_text, answer1_value, answer2_text, answer2_value
+        FROM mbti_question
+        WHERE idx = #{questionId}
+    </select>
+
+</mapper>

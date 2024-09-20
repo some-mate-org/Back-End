@@ -5,31 +5,82 @@
 <mapper namespace="org.somemate.demo.user.dao.UserDao">
 
     <select id="getTestUser" resultType="org.somemate.demo.user.dto.User">
-        select idx, openchat_link, name, password, mbti, age, gender, profile
-        from user
-        where idx=1
-    </select>
-
-    <select id="existsByUserID" resultType="boolean">
-        SELECT EXISTS(
-            SELECT 1 FROM user WHERE user_ID = #{user_ID}
-        )
-    </select>
-
-    <select id="saveUser" resultType="org.somemate.demo.user.dto.User">
         select idx,
                openchat_link,
                name,
-               user_ID,
+               user_id,
                password,
                mbti,
                age,
                gender,
-               profile,
-#                refreshToken
+               profile
         from user
         where idx = 1
     </select>
+
+    <select id="getUserMBTI" parameterType="int" resultType="string">
+        select mbti
+        from user
+        where idx = #{userIdx}
+    </select>
+
+    <select id="getMatchedUserInfo" parameterType="map" resultType="org.somemate.demo.user.dto.RecommendedUser">
+        select user.idx,
+               user.profile,
+               user.openchat_link,
+               user.name,
+               user.gender,
+               user.age,
+               user.mbti,
+               mbti.desc
+        from user
+                 join mbti on user.mbti = mbti.my_mbti
+        where user.gender != (select user.gender
+                              from user
+                              where user.idx = #{userIdx})
+          and user.mbti in (
+#             best_mbti 추출
+            select best_mbti.best_mbti
+            from best_mbti
+            where my_mbti = #{mbti})
+          # 매칭 히스토리
+          and user.idx not in
+              (select user.idx from matching_history where my_idx = #{userIdx} and recommended_idx = user.idx)
+        order by rand()
+        limit 1
+        ;
+    </select>
+
+    <select id="existsByUserID" resultType="int">
+        SELECT COUNT(1)
+        FROM user
+        WHERE user_id = #{user_id}
+    </select>
+
+    <!-- 사용자 정보 저장 (INSERT) -->
+    <insert id="saveUser" parameterType="org.somemate.demo.user.dto.User">
+        INSERT INTO `user` (
+            openchat_link,
+            name,
+            user_id,
+            password,
+            mbti,
+            age,
+            gender,
+            profile,
+            refresh_token
+        ) VALUES (
+                     #{openchatLink},
+                     #{name},
+                     #{user_id},
+                     #{password},
+                     #{mbti},
+                     #{age},
+                     #{gender},
+                     #{profile},
+                     #{refreshToken}
+                 )
+    </insert>
 
     <update id="updateUser">
         UPDATE user

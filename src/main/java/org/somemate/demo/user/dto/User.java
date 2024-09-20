@@ -2,9 +2,9 @@ package org.somemate.demo.user.dto;
 
 public class User {
     private int idx;
-    private String openChatLink;
+    private String openchatLink;
     private String name;
-    private String userID;
+    private String user_id;
     private String password;
     private String mbti;
     private String refreshToken;
@@ -12,14 +12,9 @@ public class User {
     private String profile;
     private int age;
 
-//    public User(String phone, String password) {
-//        this.phone = phone;
-//        this.password = password;
-//    }
-
-    public User(int idx, String openchat_link, String name, String userID, String password, String mbti, int age, int gender, String profile, String refreshToken) {
+    public User(int idx, String openchatLink, String name, String user_id, String password, String mbti, int age, int gender, String profile, String refreshToken) {
         this.idx = idx;
-        this.openChatLink = openchat_link;
+        this.openchatLink = openchatLink;
         this.name = name;
         this.password = password;
         this.refreshToken = refreshToken;
@@ -27,7 +22,7 @@ public class User {
         this.profile = profile;
         this.age = age;
         this.mbti = mbti;
-        this.userID = userID;
+        this.user_id = user_id;
 
     }
 
@@ -49,11 +44,11 @@ public class User {
     }
 
     public String getUserID() {
-        return userID;
+        return user_id;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserID(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getPassword() {
@@ -105,16 +100,16 @@ public class User {
     }
 
     public String getOpenChatLink() {
-        return openChatLink;
+        return openchatLink;
     }
 
-    public void setOpenChatLink(String openChatLink) {
-        this.openChatLink = openChatLink;
+    public void setOpenChatLink(String openchat_link) {
+        this.openchatLink = openchat_link;
     }
 
     @Override
     public String toString() {
-        return "User [idx=" + idx + ", openChatLink=" + openChatLink + ", name=" + name + ", userID=" + userID + ", refreshToken=" + refreshToken + ", gender=" + gender + ", profile=" + profile + ", age=" + age + "]";
+        return "User [idx=" + idx + ", openchatLink=" + openchatLink + ", name=" + name + ", user_id=" + user_id + ", refreshToken=" + refreshToken + ", gender=" + gender + ", profile=" + profile + ", age=" + age + "]";
     }
 
 }

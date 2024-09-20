@@ -10,27 +10,15 @@ import java.util.Map;
 
 @Mapper
 public interface UserDao {
-    User getTestUser() throws SQLException;
 
-    // 사용자를 저장하는 메서드
-    void saveUser(@Param("user") User user) throws SQLException;
-
-    // 아이디 중복 검사 메서드
-    boolean existsByUserID(String userID) throws SQLException;
-
-    // 사용자 이름과 비밀번호로 사용자를 찾는 메서드
-    User findByNameAndPassword(@Param("userID") String userID, @Param("password") String password) throws SQLException;
+    void saveUser(User user) throws SQLException;
 
     // ID로 사용자를 찾는 메서드
     User findById(@Param("id") int id) throws SQLException;
-
-    // 사용자 RefreshToken를 삭제하는 메서드
-    boolean deleteRefreshToken(String refreshToken) throws SQLException;
 
     String getUserMBTI(int userIdx) throws SQLException;
 
     RecommendedUser getMatchedUserInfo(Map<String, Object> map) throws SQLException;
 
-    int updateUserMbti(User user) throws SQLException;
-
+    int existsByUserID(String userID)throws SQLException;
 }
