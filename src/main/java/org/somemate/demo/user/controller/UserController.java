@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.somemate.demo.user.dto.RecommendedUser;
 import org.springframework.http.HttpStatus;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,6 +66,23 @@ public class UserController {
         }
     }
 
+    //    @GetMapping
+    //    @RequestMapping("/getMatchedUserInfo/{userIdx}")
+    //    public RecommendedUser getMatchedUserInfo(@PathVariable int userIdx) throws SQLException {
+    //        try {
+    //            String mbti = userService.getUserMBTI(userIdx);
+    //            System.out.println("mbti : " + mbti);
+    //            Map<String, Object> map = new HashMap<>();
+    //            map.put("userIdx", userIdx);
+    //            map.put("mbti", mbti);
+    //
+    //            recommendedUser = userService.getMatchedUserInfo(map);
+    //        } catch (Exception e) {
+    //            e.printStackTrace();
+    //        }
+    //
+    //        return recommendedUser;
+    //    }
 
 
 }
