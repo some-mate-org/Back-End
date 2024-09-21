@@ -66,23 +66,27 @@ public class UserController {
         }
     }
 
-    //    @GetMapping
-    //    @RequestMapping("/getMatchedUserInfo/{userIdx}")
-    //    public RecommendedUser getMatchedUserInfo(@PathVariable int userIdx) throws SQLException {
-    //        try {
-    //            String mbti = userService.getUserMBTI(userIdx);
-    //            System.out.println("mbti : " + mbti);
-    //            Map<String, Object> map = new HashMap<>();
-    //            map.put("userIdx", userIdx);
-    //            map.put("mbti", mbti);
-    //
-    //            recommendedUser = userService.getMatchedUserInfo(map);
-    //        } catch (Exception e) {
-    //            e.printStackTrace();
-    //        }
-    //
-    //        return recommendedUser;
-    //    }
+        @GetMapping
+        @RequestMapping("/getMatchedUserInfo/{userId}")
+        public RecommendedUser getMatchedUserInfo(@PathVariable String userId) throws SQLException {
+            System.out.println(userId);
+            try {
+                Map<String, Object> result = userService.getUserMbtiAndIdx(userId);
+                System.out.println("result : " + result);
+                String mbti = (String) result.get("mbti");
+                int idx = (Integer) result.get("idx");
+
+                Map<String, Object> map = new HashMap<>();
+                map.put("userIdx", idx);
+                map.put("mbti", mbti);
+
+                recommendedUser = userService.getMatchedUserInfo(map);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return recommendedUser;
+        }
 
 
 }

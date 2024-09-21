@@ -16,7 +16,7 @@ public interface UserDao {
     // ID로 사용자를 찾는 메서드
     User findById(@Param("id") int id) throws SQLException;
 
-    String getUserMBTI(int userIdx) throws SQLException;
+    Map<String,Object> getUserMbtiAndIdx(String userId) throws SQLException;
 
     RecommendedUser getMatchedUserInfo(Map<String, Object> map) throws SQLException;
 

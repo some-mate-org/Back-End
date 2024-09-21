@@ -18,10 +18,10 @@
         where idx = 1
     </select>
 
-    <select id="getUserMBTI" parameterType="int" resultType="string">
-        select mbti
+    <select id="getUserMbtiAndIdx" parameterType="string" resultType="map">
+        select idx, mbti
         from user
-        where idx = #{userIdx}
+        where user_id = #{userId}
     </select>
 
     <select id="getMatchedUserInfo" parameterType="map" resultType="org.somemate.demo.user.dto.RecommendedUser">

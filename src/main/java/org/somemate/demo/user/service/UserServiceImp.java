@@ -39,8 +39,8 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public String getUserMBTI(int userIdx) throws SQLException {
-        return userDao.getUserMBTI(userIdx);
+    public Map<String,Object> getUserMbtiAndIdx(String userId) throws SQLException {
+        return userDao.getUserMbtiAndIdx(userId);
     }
 
     @Override
