@@ -11,4 +11,36 @@
         WHERE idx = #{questionId}
     </select>
 
+    <select id="getEIQuestions" resultType="org.somemate.demo.question.dto.Question">
+        select idx, question1_title, question2_title, answer1_text, answer1_value, answer2_text, answer2_value
+        FROM mbti_question
+        where answer1_value='E'
+        order by rand()
+        limit 3;
+    </select>
+
+    <select id="getNSQuestion" resultType="org.somemate.demo.question.dto.Question">
+        select idx, question1_title, question2_title, answer1_text, answer1_value, answer2_text, answer2_value
+        FROM mbti_question
+        where answer1_value='N'
+        order by rand()
+        limit 1;
+    </select>
+
+    <select id="getFTQuestions" resultType="org.somemate.demo.question.dto.Question">
+        select idx, question1_title, question2_title, answer1_text, answer1_value, answer2_text, answer2_value
+        FROM mbti_question
+        where answer1_value='F'
+        order by rand()
+            limit 3;
+    </select>
+
+    <select id="getJPQuestions" resultType="org.somemate.demo.question.dto.Question">
+        select idx, question1_title, question2_title, answer1_text, answer1_value, answer2_text, answer2_value
+        FROM mbti_question
+        where answer1_value='J'
+        order by rand()
+        limit 3;
+    </select>
+
 </mapper>
