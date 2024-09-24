@@ -51,4 +51,9 @@ public class UserServiceImp implements UserService {
     public boolean isUserIdAvailable(String userId) {
         return !userDao.existsByUserId(userId);
     }
+
+    @Override
+    public int getUserIdx(String userId) throws SQLException {
+        return userDao.getUserIdx(userId);
+    }
 }
