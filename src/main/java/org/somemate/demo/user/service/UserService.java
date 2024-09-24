@@ -18,4 +18,6 @@ public interface UserService {
     void registerUser(User user)throws SQLException;
 
     boolean isUserIdAvailable(String userId)throws SQLException;
+
+    int getUserIdx(String userId)throws SQLException;
 }
