@@ -18,10 +18,13 @@
         where idx = 1
     </select>
 
+<<<<<<< HEAD
     <select id="getUserIdx" parameterType="string" resultType="int">
         select idx from user where user_id = #{userId}
     </select>
 
+=======
+>>>>>>> 7fd65cf (prev merge 그리고 백업)
     <select id="getUserMbtiAndIdx" parameterType="string" resultType="map">
         select idx, mbti
         from user
@@ -64,6 +67,7 @@
 
     <!-- 사용자 정보 저장 (INSERT) -->
     <insert id="saveUser" parameterType="org.somemate.demo.user.dto.User">
+<<<<<<< HEAD
         INSERT INTO `user` (
             openchat_link,
             name,
@@ -85,13 +89,33 @@
                      #{profile},
                      #{refreshToken}
                  )
+=======
+        INSERT INTO `user` (openchat_link,
+                            name,
+                            user_id,
+                            password,
+                            mbti,
+                            age,
+                            gender,
+                            profile,
+                            refresh_token)
+        VALUES (#{openchatLink},
+                #{name},
+                #{userId},
+                #{password},
+                #{mbti},
+                #{age},
+                #{gender},
+                #{profile},
+                #{refreshToken})
+>>>>>>> 7fd65cf (prev merge 그리고 백업)
     </insert>
 
     <update id="updateUser">
         UPDATE user
         SET name=#{name},
             openchat_link=#{openChatLink},
-            user_id=#{user_id},
+            user_id=#{userId},
             password=#{password},
             mbti=#{mbti},
             age=#{age},
@@ -99,5 +123,57 @@
             profile=#{profile}
         WHERE idx = #{idx}
     </update>
+
+    <!-- RefreshToken을 업데이트하는 쿼리 -->
+    <update id="updateRefreshToken" parameterType="map">
+        UPDATE user
+        SET refresh_token = #{refreshToken}
+        WHERE user_id = #{userId}
+    </update>
+
+    <!-- RefreshToken을 조회하는 쿼리 -->
+    <select id="getRefreshTokenByUserId" parameterType="string" resultType="string">
+        SELECT refresh_token
+        FROM user
+        WHERE user_id = #{userId}
+    </select>
+
+<!--    <select id="findByUserId" parameterType="string" resultType="org.somemate.demo.user.dto.User">-->
+        <select id="findByUserId" resultMap="UserResultMap">
+        SELECT idx,
+               openchat_link,
+               name,
+               user_id,
+               password,
+               mbti,
+               age,
+               gender,
+               profile,
+               refresh_token
+        FROM user
+        WHERE user_id = #{userId}
+    </select>
+
+    <resultMap id="UserResultMap" type="User">
+        <result property="name" column="name" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="mbti" column="mbti" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="age" column="age" jdbcType="INTEGER" javaType="int"/>
+        <result property="gender" column="gender" jdbcType="INTEGER" javaType="int"/>
+        <result property="profile" column="profile" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="userId" column="user_id" jdbcType="NVARCHAR" javaType="String"/>
+    </resultMap>
+
+
+<!--        <select id="findUserByUserId" parameterType="string" resultType="org.somemate.demo.user.dto.User">-->
+    <select id="findUserByUserId" resultMap="UserResultMap" useCache="false">
+        SELECT name,
+               mbti,
+               age,
+               gender,
+               profile
+        FROM user
+        WHERE user_id = #{userId}
+    </select>
+
 
 </mapper>
