@@ -19,5 +19,13 @@ public interface UserService {
 
     boolean isUserIdAvailable(String userId)throws SQLException;
 
+    User authenticateUser(String userId, String password) throws SQLException;
+
+    void updateRefreshToken(String userId, String refreshToken) throws SQLException;
+
+    String getRefreshTokenByUserId(String userId) throws SQLException;
+
+    User getUserByUserId(String userId) throws SQLException;
+
     int getUserIdx(String userId)throws SQLException;
 }

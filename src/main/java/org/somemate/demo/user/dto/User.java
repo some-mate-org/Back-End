@@ -4,7 +4,7 @@ public class User {
     private int idx;
     private String openchatLink;
     private String name;
-    private String user_id;
+    private String userId;
     private String password;
     private String mbti;
     private String refreshToken;
@@ -12,7 +12,9 @@ public class User {
     private String profile;
     private int age;
 
-    public User(int idx, String openchatLink, String name, String user_id, String password, String mbti, int age, int gender, String profile, String refreshToken) {
+//    public User(){}
+
+    public User(int idx, String openchatLink, String name, String userId, String password, String mbti, int age, int gender, String profile, String refreshToken) {
         this.idx = idx;
         this.openchatLink = openchatLink;
         this.name = name;
@@ -22,7 +24,11 @@ public class User {
         this.profile = profile;
         this.age = age;
         this.mbti = mbti;
-        this.user_id = user_id;
+        this.userId = userId;
+
+    }
+
+    public User() {
 
     }
 
@@ -34,7 +40,6 @@ public class User {
         this.idx = idx;
     }
 
-
     public String getName() {
         return name;
     }
@@ -43,12 +48,12 @@ public class User {
         this.name = name;
     }
 
-    public String getUserID() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserID(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {
@@ -109,7 +114,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [idx=" + idx + ", openchatLink=" + openchatLink + ", name=" + name + ", user_id=" + user_id + ", refreshToken=" + refreshToken + ", gender=" + gender + ", profile=" + profile + ", age=" + age + "]";
+        return "User [idx=" + idx + ", openchatLink=" + openchatLink + ", name=" + name + ", userId=" + userId + ", refreshToken=" + refreshToken + ", gender=" + gender + ", profile=" + profile + ", age=" + age + "]";
     }
 
 }
