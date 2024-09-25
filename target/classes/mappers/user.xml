@@ -5,17 +5,9 @@
 <mapper namespace="org.somemate.demo.user.dao.UserDao">
 
     <select id="getTestUser" resultType="org.somemate.demo.user.dto.User">
-        select idx,
-               openchat_link,
-               name,
-               user_id,
-               password,
-               mbti,
-               age,
-               gender,
-               profile
-        from user
-        where idx = 1
+        select idx, openchat_link, name, password, mbti, age, gender, profile, refreshToken
+        from users
+        where idx=1
     </select>
 
     <select id="getUserIdx" parameterType="string" resultType="int">
@@ -64,24 +56,27 @@
 
     <!-- 사용자 정보 저장 (INSERT) -->
     <insert id="saveUser" parameterType="org.somemate.demo.user.dto.User">
-        INSERT INTO `user` (openchat_link,
-                            name,
-                            user_id,
-                            password,
-                            mbti,
-                            age,
-                            gender,
-                            profile,
-                            refresh_token)
-        VALUES (#{openchatLink},
-                #{name},
-                #{userId},
-                #{password},
-                #{mbti},
-                #{age},
-                #{gender},
-                #{profile},
-                #{refreshToken})
+        INSERT INTO `user` (
+            openchat_link,
+            name,
+            user_id,
+            password,
+            mbti,
+            age,
+            gender,
+            profile,
+            refresh_token
+        ) VALUES (
+                     #{openchatLink},
+                     #{name},
+                     #{userId},
+                     #{password},
+                     #{mbti},
+                     #{age},
+                     #{gender},
+                     #{profile},
+                     #{refreshToken}
+                 )
     </insert>
 
     <update id="updateUser">
@@ -96,6 +91,7 @@
             profile=#{profile}
         WHERE idx = #{idx}
     </update>
+
 
     <!-- RefreshToken을 업데이트하는 쿼리 -->
     <update id="updateRefreshToken" parameterType="map">

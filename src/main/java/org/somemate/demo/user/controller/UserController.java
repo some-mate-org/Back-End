@@ -37,6 +37,7 @@ public class UserController {
     // 사용자 등록
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
+        System.out.println(user);
         try {
             userService.registerUser(user);
             return ResponseEntity.status(HttpStatus.CREATED).body("사용자가 성공적으로 등록되었습니다.");
@@ -167,9 +168,23 @@ public class UserController {
     }
 
     // 특정 사용자의 정보를 조회하는 엔드포인트
-    @GetMapping("/getMatchedUserInfo/{userId}")
-    public RecommendedUser getMatchedUserInfo(@PathVariable String userId) throws SQLException {
+    @GetMapping("/getMatchedUserInfo")
+    public ResponseEntity<?> getMatchedUserInfo(HttpServletRequest request) throws SQLException {
         try {
+            // Authorization 헤더에서 Bearer 토큰 추출
+            String authorizationHeader = request.getHeader("Authorization");
+
+            if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증 정보가 없습니다.");
+            }
+
+            // Bearer 토큰에서 실제 토큰 값만 추출
+            String token = authorizationHeader.substring(7);
+
+            // 토큰에서 userId 추출 (토큰 검증 및 파싱)
+            String userId = jwtUtil.getUserId(token);
+
+
             Map<String, Object> result = userService.getUserMbtiAndIdx(userId);
             String mbti = (String) result.get("mbti");
             int idx = (Integer) result.get("idx");
@@ -179,10 +194,11 @@ public class UserController {
             map.put("mbti", mbti);
 
             recommendedUser = userService.getMatchedUserInfo(map);
+            return ResponseEntity.ok(recommendedUser);
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return recommendedUser;
     }
 
 

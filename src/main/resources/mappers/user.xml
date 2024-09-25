@@ -69,7 +69,7 @@
         ) VALUES (
                      #{openchatLink},
                      #{name},
-                     #{user_id},
+                     #{userId},
                      #{password},
                      #{mbti},
                      #{age},
@@ -83,7 +83,7 @@
         UPDATE user
         SET name=#{name},
             openchat_link=#{openChatLink},
-            user_id=#{user_id},
+            user_id=#{userId},
             password=#{password},
             mbti=#{mbti},
             age=#{age},
