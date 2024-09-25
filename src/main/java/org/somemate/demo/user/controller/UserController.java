@@ -49,6 +49,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody User loginRequest) {
         try {
+            System.out.println(loginRequest);
             User user = userService.authenticateUser(loginRequest.getUserId(), loginRequest.getPassword());
             if (user != null) {
                 String accessToken = jwtUtil.generateToken(user.getUserId());
@@ -100,6 +101,8 @@ public class UserController {
     // 특정 사용자의 정보를 조회하는 엔드포인트
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable int id) throws SQLException {
+
+
         User user = userService.getUserById(id);
         if (user != null) {
             return ResponseEntity.ok(user);
