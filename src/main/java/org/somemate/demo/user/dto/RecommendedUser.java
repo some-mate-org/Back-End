@@ -21,7 +21,6 @@ public class RecommendedUser {
         this.desc = desc;
     }
 
-
     public int getIdx() {
         return idx;
     }

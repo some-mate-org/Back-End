@@ -5,23 +5,13 @@ import org.somemate.demo.user.dto.RecommendedUser;
 import org.somemate.demo.user.dto.User;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
-//import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.security.MessageDigest;
-import java.util.Base64;
-import java.util.Date;
 import java.util.Map;
-
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class UserServiceImp implements UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
 
@@ -30,82 +20,65 @@ public class UserServiceImp implements UserService {
         this.passwordEncoder = passwordEncoder; // 의존성 주입
     }
 
-    // 사용자 패스워드 암호화
-    private String encryptPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedPassword = md.digest(password.getBytes());
-            return Base64.getEncoder().encodeToString(hashedPassword);
-        } catch (Exception e) {
-            throw new RuntimeException("비밀번호 암호화에 실패했습니다.", e);
-        }
-    }
-
-    // 회원가입
+    // 회원가입 처리 메서드 - 사용자의 비밀번호를 암호화한 후 DB에 저장
     @Override
     public void registerUser(User user) throws SQLException {
         // 패스워드 암호화
         String encryptedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encryptedPassword);  // 암호화된 패스워드를 설정
-
+        user.setPassword(encryptedPassword);
         // DB에 사용자 정보 저장
         userDao.saveUser(user);
     }
 
-
-    // 주어진 ID로 사용자 정보를 조회
+    // 사용자 ID로 MBTI와 인덱스를 조회하는 메서드
     @Override
-    public User getUserById(int id) throws SQLException {
-        return userDao.findById(id);
-    }
-
-    @Override
-    public Map<String,Object> getUserMbtiAndIdx(String userId) throws SQLException {
+    public Map<String, Object> getUserMbtiAndIdx(String userId) throws SQLException {
         return userDao.getUserMbtiAndIdx(userId);
     }
 
+    // 매칭된 사용자의 정보를 조회하는 메서드
     @Override
     public RecommendedUser getMatchedUserInfo(Map<String, Object> map) throws SQLException {
         return userDao.getMatchedUserInfo(map);
     }
 
+    // 주어진 사용자 ID의 사용 가능 여부를 확인하는 메서드
     @Override
     public boolean isUserIdAvailable(String userId) {
         return !userDao.existsByUserId(userId);
     }
 
+    // 사용자 ID를 기반으로 refreshToken을 업데이트하는 메서드
     @Override
-    // refreshToken을 업데이트하는 메서드 추가
     public void updateRefreshToken(String userId, String refreshToken) throws SQLException {
         userDao.updateRefreshToken(userId, refreshToken);
     }
 
+    // 사용자 ID를 기반으로 refreshToken을 조회하는 메서드
     @Override
-    // DB에서 refreshToken을 가져오는 메서드
     public String getRefreshTokenByUserId(String userId) throws SQLException {
         return userDao.getRefreshTokenByUserId(userId);
     }
 
+    // 로그인 할때 사용자의 아이디 및 패스워드 확인 메서드
     @Override
     public User authenticateUser(String userId, String password) throws SQLException {
-        User user = userDao.findByUserId(userId);  // DB에서 사용자 조회
+        User user = userDao.findByUserId(userId);
 
         if (user != null) {
-            System.out.println("find user: " + user.getUserId());
             if (passwordEncoder.matches(password, user.getPassword())) {
                 System.out.println("password same");
-                return user;  // 비밀번호가 일치하면 인증 성공
+                return user;
             } else {
                 System.out.println("password not same");
             }
         } else {
             System.out.println("not find");
         }
-        return null;  // 인증 실패
+        return null;
     }
 
-
-    @Transactional
+    // 사용자 ID로 사용자 정보를 조회하는 메서드 (AccessToken 발급 받을때 사용)
     @Override
     public User getUserByUserId(String userId) throws SQLException {
         System.out.println("getUserByUserId called with userId: " + userId);
@@ -122,10 +95,10 @@ public class UserServiceImp implements UserService {
         return user;
     }
 
+    // 사용자 ID로 사용자의 인덱스를 조회하는 메서드
     @Override
     public int getUserIdx(String userId) throws SQLException {
         return userDao.getUserIdx(userId);
     }
-
 
 }

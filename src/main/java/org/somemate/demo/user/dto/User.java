@@ -12,8 +12,6 @@ public class User {
     private String profile;
     private int age;
 
-//    public User(){}
-
     public User(int idx, String openchatLink, String name, String userId, String password, String mbti, int age, int gender, String profile, String refreshToken) {
         this.idx = idx;
         this.openchatLink = openchatLink;
@@ -25,11 +23,9 @@ public class User {
         this.age = age;
         this.mbti = mbti;
         this.userId = userId;
-
     }
 
     public User() {
-
     }
 
     public int getIdx() {

@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.Duration;
 import java.util.Date;
-import java.util.Map;
 
 @Component
 public class JWTUtil {
@@ -33,12 +32,6 @@ public class JWTUtil {
     // RefreshToken 생성
     public String createRefreshToken(String userId) {
         return create(userId, "refreshToken", refreshTokenExpireTime);
-    }
-
-    // JWT에서 userId 추출
-    public String extractUserId(String token) {
-//        system.out
-        return extractAllClaims(token).getSubject();
     }
 
     // JWT 토큰에서 모든 클레임을 추출
@@ -101,21 +94,6 @@ public class JWTUtil {
         } catch (Exception e) {
             System.err.println("Failed to get userId from token: " + e.getMessage());
             return null; // 예외 발생 시 null 반환
-        }
-    }
-
-    // RefreshToken 유효성 검사
-    public boolean validateRefreshToken(String token) {
-        try {
-            Jws<Claims> claims = Jwts.parserBuilder()
-                    .setSigningKey(secretKey)
-                    .build()
-                    .parseClaimsJws(token);
-            Date expiration = claims.getBody().getExpiration();
-            return !expiration.before(new Date());  // 만료되지 않았는지 확인
-        } catch (Exception e) {
-            System.err.println("RefreshToken check fail: " + e.getMessage());
-            return false;
         }
     }
 }

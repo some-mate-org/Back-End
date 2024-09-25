@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.somemate.demo.util.JWTUtil;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // 최신 Spring Security 설정
+
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS 설정
                 .csrf(csrf -> csrf.disable())    // CSRF 비활성화
@@ -56,7 +56,7 @@ public class SecurityConfig {
         // 여러 도메인에서 접근 가능하도록 설정
         corsConfiguration.setAllowedOrigins(List.of(
                 "http://localhost:5173",   // 개발 환경
-                "https://your-production-domain.com" // 배포 환경
+                "http://10.10.222.159:5173" //  네트워크 환경에서 접속하려는 IP 주소
         ));
 
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
