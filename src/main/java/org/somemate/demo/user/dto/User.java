@@ -12,8 +12,7 @@ public class User {
     private String profile;
     private int age;
 
-
-    public User(int idx, String openchat_link, String name, String password, String mbti, int age, int gender, String profile, String refreshToken) {
+    public User(int idx, String openchatLink, String name, String userId, String password, String mbti, int age, int gender, String profile, String refreshToken) {
         this.idx = idx;
         this.openchatLink = openchatLink;
         this.name = name;
