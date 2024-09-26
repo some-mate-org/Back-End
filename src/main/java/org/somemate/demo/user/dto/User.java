@@ -10,6 +10,7 @@ public class User {
     private String refreshToken;
     private int gender;
     private String profile;
+    // 나이
     private int age;
 
     public User(int idx, String openchatLink, String name, String userId, String password, String mbti, int age, int gender, String profile, String refreshToken) {
