@@ -36,7 +36,6 @@ public class SecurityConfig {
                                 "/user/register",
                                 "/user/getMatchedUserInfo/**",
                                 "/mbti/**",
-                                "/matching/history/**",
                                 "/user/updateUserMbti",
                                 "/user/refresh" // 토큰 갱신 경로 추가
                         ).permitAll() // 인증 없이 접근 가능한 경로
@@ -55,8 +54,10 @@ public class SecurityConfig {
 
         // 여러 도메인에서 접근 가능하도록 설정
         corsConfiguration.setAllowedOrigins(List.of(
-                "http://localhost:5173",   // 개발 환경
-                "http://10.10.222.159:5173" //  네트워크 환경에서 접속하려는 IP 주소
+                "http://localhost:8080",
+                "http://localhost:5173",        // 개발 환경
+                "http://192.168.219.177:5173",  // 네트워크 환경에서 접속하려는 IP 주소
+                "http://125.249.153.42:5173"     // 사용자의 공인 IP 주소 추가
         ));
 
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
