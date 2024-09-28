@@ -5,12 +5,14 @@ public class RecommendedUser {
     private String profile;
     private String openchat_link;
     private String name;
-    private String gender;
+    private int gender;
     private String age;
     private String mbti;
     private String desc;
 
-    public RecommendedUser(int idx, String profile, String openchat_link, String name, String gender, String age, String mbti, String desc) {
+    public RecommendedUser() {}
+
+    public RecommendedUser(int idx, String profile, String openchat_link, String name, int gender, String age, String mbti, String desc) {
         this.idx = idx;
         this.profile = profile;
         this.openchat_link = openchat_link;
@@ -53,11 +55,11 @@ public class RecommendedUser {
         this.name = name;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
