@@ -9,5 +9,8 @@ import java.util.ArrayList;
 public interface HistoryService {
     int postMatchingHistory(MatchingHistory matchingHistory) throws SQLException;
     ArrayList<User> getUserHistory(int userIdx) throws SQLException;
+<<<<<<< HEAD
     int deleteMatchingHistory(int myIdx, int recommendedIdx) throws SQLException;
+=======
+>>>>>>> develop
 }

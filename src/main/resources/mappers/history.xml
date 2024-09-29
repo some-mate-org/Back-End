@@ -16,6 +16,7 @@
         <result property="openchat_link" column="openchat_link" jdbcType="NVARCHAR" javaType="String" />
         <result property="mbti" column="mbti" jdbcType="NVARCHAR" javaType="String" />
     </resultMap>
+<<<<<<< HEAD
 
     <select id="getUserHistory" parameterType="int" resultMap="MatchedUser">
         select idx, profile, name, gender, openchat_link, mbti ,age
@@ -27,4 +28,11 @@
         DELETE FROM matching_history
         WHERE my_idx = #{my_idx} AND recommended_idx = #{recommendedIdx}
     </delete>
+=======
+    <select id="getUserHistory" parameterType="int" resultMap="MatchedUser">
+        select idx, profile, name, gender, openchat_link, mbti
+        from user join matching_history on (user.idx = matching_history.recommended_idx)
+        where my_idx=#{userIdx}
+    </select>
+>>>>>>> develop
 </mapper>

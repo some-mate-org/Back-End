@@ -6,8 +6,11 @@
     <insert id="postMatchingHistory" parameterType="org.somemate.demo.matchingHistory.dto.MatchingHistory">
         insert into matching_history values(#{my_idx}, #{recommended_idx})
     </insert>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> develop
 
 
     <resultMap id="MatchedUser" type="org.somemate.demo.user.dto.RecommendedUser">
@@ -18,6 +21,7 @@
         <result property="openchat_link" column="openchat_link" jdbcType="NVARCHAR" javaType="String" />
         <result property="mbti" column="mbti" jdbcType="NVARCHAR" javaType="String" />
     </resultMap>
+<<<<<<< HEAD
 
     <select id="getUserHistory" parameterType="int" resultMap="MatchedUser">
         select idx, profile, name, gender, openchat_link, mbti ,age
@@ -30,4 +34,11 @@
         WHERE my_idx = #{my_idx} AND recommended_idx = #{recommendedIdx}
     </delete>
 >>>>>>> Stashed changes
+=======
+    <select id="getUserHistory" parameterType="int" resultMap="MatchedUser">
+        select idx, profile, name, gender, openchat_link, mbti
+        from user join matching_history on (user.idx = matching_history.recommended_idx)
+        where my_idx=#{userIdx}
+    </select>
+>>>>>>> develop
 </mapper>
