@@ -81,7 +81,4 @@ public class HistoryController {
         }
     }
 
-
-
->>>>>>> Stashed changes
 }
