@@ -37,9 +37,10 @@ public class SecurityConfig {
                                 "/user/getMatchedUserInfo/**",
                                 "/mbti/**",
                                 "/matching/history/**",
-                                "/user/updateUserMbti",
-                                "/user/refresh" // 토큰 갱신 경로 추가
+                                "/user/updateUserMbti"
+                                //"/user/refresh" // 토큰 갱신 경로 추가
                         ).permitAll() // 인증 없이 접근 가능한 경로
+                        .requestMatchers("/mainuser").authenticated()
                         .anyRequest().authenticated() // 나머지 요청은 인증 필요
                 )
                 .addFilterAfter(new JWTAuthenticationFilter(jwtUtil), CorsFilter.class) // CORS 필터 다음에 JWT 필터 추가
@@ -56,7 +57,12 @@ public class SecurityConfig {
         // 여러 도메인에서 접근 가능하도록 설정
         corsConfiguration.setAllowedOrigins(List.of(
                 "http://localhost:5173",   // 개발 환경
+<<<<<<< HEAD
                 "http://10.10.222.159:5173" //  네트워크 환경에서 접속하려는 IP 주소
+=======
+                "http://10.10.222.159:5173",
+                "https://your-production-domain.com" // 배포 환경
+>>>>>>> 7c80016f8e93827e4e372be662b472073fba7104
         ));
 
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
