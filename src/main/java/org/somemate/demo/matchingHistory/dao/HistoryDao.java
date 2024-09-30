@@ -11,4 +11,7 @@ import java.util.ArrayList;
 public interface HistoryDao {
     public int postMatchingHistory(MatchingHistory matchingHistory) throws SQLException;
     public ArrayList<User> getUserHistory(int userIdx) throws SQLException;
+    public int deleteMatchingHistory(int my_idx, int recommendedIdx) throws SQLException;
+
 }
+

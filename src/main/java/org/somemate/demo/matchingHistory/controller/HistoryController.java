@@ -18,8 +18,8 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("/matching")
 public class HistoryController {
-    HistoryService historyService;
     private final JWTUtil jwtUtil;
+    HistoryService historyService;
     UserService userService;
 
     public HistoryController(HistoryService historyService, JWTUtil jwtUtil, UserService userService) {
@@ -56,7 +56,7 @@ public class HistoryController {
     }
 
     @PostMapping("/history/add")
-    public ResponseEntity<?> postMatchingHistory(HttpServletRequest request, @RequestBody Map<String, Integer> requestBody ) {
+    public ResponseEntity<?> postMatchingHistory(HttpServletRequest request, @RequestBody Map<String, Integer> requestBody) {
         // Authorization 헤더에서 Bearer 토큰 추출
         String authorizationHeader = request.getHeader("Authorization");
 
@@ -83,6 +83,30 @@ public class HistoryController {
         }
     }
 
+    @DeleteMapping("/history/delete")
+    public ResponseEntity<?> deleteMatchingHistory(
+            HttpServletRequest request,
+            @RequestParam("recommendedIdx") Integer recommendedIdx) {
 
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증 정보가 없습니다.");
+        }
+        String token = authorizationHeader.substring(7);
+        String userId = jwtUtil.getUserId(token);
+        System.out.println("delete matching history : " + userId);
+        try {
+            int my_idx = userService.getUserIdx(userId);
+            int result = historyService.deleteMatchingHistory(my_idx, recommendedIdx);
+
+            if (result > 0) {
+                return ResponseEntity.status(HttpStatus.OK).body("매칭 기록이 성공적으로 삭제되었습니다.");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 매칭 기록을 찾을 수 없습니다.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("매칭 기록 삭제 중 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
 
 }
