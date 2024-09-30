@@ -4,24 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.somemate.demo.user.dao.UserDao">
 
-<<<<<<< HEAD
-    <!-- 사용자 정보를 매핑하는 resultMap 설정 -->
-    <resultMap id="UserResultMap" type="User">
-        <result property="name" column="name" jdbcType="NVARCHAR" javaType="String"/>
-        <result property="mbti" column="mbti" jdbcType="NVARCHAR" javaType="String"/>
-        <result property="age" column="age" jdbcType="INTEGER" javaType="int"/>
-        <result property="gender" column="gender" jdbcType="INTEGER" javaType="int"/>
-        <result property="profile" column="profile" jdbcType="NVARCHAR" javaType="String"/>
-        <result property="userId" column="user_id" jdbcType="NVARCHAR" javaType="String"/>
-    </resultMap>
-=======
-    <select id="getTestUser" resultType="org.somemate.demo.user.dto.User">
-        select idx, openchat_link, name, password, mbti, age, gender, profile, refreshToken
-        from users
-        where idx=1
-    </select>
->>>>>>> 7c80016f8e93827e4e372be662b472073fba7104
-
     <!-- 사용자 ID로 사용자 인덱스를 조회하는 쿼리 -->
     <select id="getUserIdx" parameterType="string" resultType="int">
         select idx
@@ -69,48 +51,27 @@
 
     <!-- 사용자 정보를 저장하는 INSERT 쿼리 -->
     <insert id="saveUser" parameterType="org.somemate.demo.user.dto.User">
-        INSERT INTO `user` (
-            openchat_link,
-            name,
-            user_id,
-            password,
-            mbti,
-            age,
-            gender,
-            profile,
-            refresh_token
-        ) VALUES (
-                     #{openchatLink},
-                     #{name},
-                     #{user_id},
-                     #{password},
-                     #{mbti},
-                     #{age},
-                     #{gender},
-                     #{profile},
-                     #{refreshToken}
-                 )
+        INSERT INTO `user` (openchat_link,
+                            name,
+                            user_id,
+                            password,
+                            mbti,
+                            age,
+                            gender,
+                            profile,
+                            refresh_token)
+        VALUES (#{openchatLink},
+                #{name},
+                #{userId},
+                #{password},
+                #{mbti},
+                #{age},
+                #{gender},
+                #{profile},
+                #{refreshToken})
     </insert>
 
-<<<<<<< HEAD
     <!-- 사용자 ID로 refreshToken을 업데이트하는 쿼리 -->
-=======
-    <update id="updateUser">
-        UPDATE user
-        SET name=#{name},
-            openchat_link=#{openChatLink},
-            user_id=#{user_id},
-            password=#{password},
-            mbti=#{mbti},
-            age=#{age},
-            gender=#{gender},
-            profile=#{profile}
-        WHERE idx = #{idx}
-    </update>
-
-
-    <!-- RefreshToken을 업데이트하는 쿼리 -->
->>>>>>> 7c80016f8e93827e4e372be662b472073fba7104
     <update id="updateRefreshToken" parameterType="map">
         UPDATE user
         SET refresh_token = #{refreshToken}
@@ -151,5 +112,15 @@
         FROM user
         WHERE user_id = #{userId}
     </select>
+
+    <!-- 사용자 정보를 매핑하는 resultMap 설정 -->
+    <resultMap id="UserResultMap" type="User">
+        <result property="name" column="name" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="mbti" column="mbti" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="age" column="age" jdbcType="INTEGER" javaType="int"/>
+        <result property="gender" column="gender" jdbcType="INTEGER" javaType="int"/>
+        <result property="profile" column="profile" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="userId" column="user_id" jdbcType="NVARCHAR" javaType="String"/>
+    </resultMap>
 
 </mapper>

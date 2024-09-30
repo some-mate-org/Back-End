@@ -4,16 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.somemate.demo.user.dao.UserDao">
 
-    <!-- 사용자 정보를 매핑하는 resultMap 설정 -->
-    <resultMap id="UserResultMap" type="User">
-        <result property="name" column="name" jdbcType="NVARCHAR" javaType="String"/>
-        <result property="mbti" column="mbti" jdbcType="NVARCHAR" javaType="String"/>
-        <result property="age" column="age" jdbcType="INTEGER" javaType="int"/>
-        <result property="gender" column="gender" jdbcType="INTEGER" javaType="int"/>
-        <result property="profile" column="profile" jdbcType="NVARCHAR" javaType="String"/>
-        <result property="userId" column="user_id" jdbcType="NVARCHAR" javaType="String"/>
-    </resultMap>
-
     <!-- 사용자 ID로 사용자 인덱스를 조회하는 쿼리 -->
     <select id="getUserIdx" parameterType="string" resultType="int">
         select idx
@@ -122,5 +112,15 @@
         FROM user
         WHERE user_id = #{userId}
     </select>
+
+    <!-- 사용자 정보를 매핑하는 resultMap 설정 -->
+    <resultMap id="UserResultMap" type="User">
+        <result property="name" column="name" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="mbti" column="mbti" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="age" column="age" jdbcType="INTEGER" javaType="int"/>
+        <result property="gender" column="gender" jdbcType="INTEGER" javaType="int"/>
+        <result property="profile" column="profile" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="userId" column="user_id" jdbcType="NVARCHAR" javaType="String"/>
+    </resultMap>
 
 </mapper>

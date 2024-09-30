@@ -82,9 +82,6 @@ public class HistoryController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("히스토리 등록 중 오류가 발생했습니다: " + e.getMessage());
         }
     }
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 
     @DeleteMapping("/history/delete")
     public ResponseEntity<?> deleteMatchingHistory(
@@ -111,9 +108,5 @@ public class HistoryController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("매칭 기록 삭제 중 오류가 발생했습니다: " + e.getMessage());
         }
     }
-=======
-
-
->>>>>>> develop
 
 }

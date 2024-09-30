@@ -25,12 +25,9 @@ public class HistoryServiceImp implements HistoryService {
     public ArrayList<User> getUserHistory(int userIdx) throws SQLException {
         return historyDao.getUserHistory(userIdx);
     }
-<<<<<<< HEAD
 
     @Override
     public int deleteMatchingHistory(int my_idx, int recommendedIdx) throws SQLException {
         return historyDao.deleteMatchingHistory(my_idx, recommendedIdx);
     }
-=======
->>>>>>> develop
 }
