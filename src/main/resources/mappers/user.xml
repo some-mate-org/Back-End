@@ -19,7 +19,7 @@
     </select>
 
     <!-- 매칭된 사용자 정보를 조회하는 쿼리 -->
-    <select id="getMatchedUserInfo" parameterType="map" resultType="org.somemate.demo.user.dto.RecommendedUser">
+    <select id="getMatchedUserInfo" parameterType="map" resultMap="RecommendedUserResultMap">
         select user.idx,
                user.profile,
                user.openchat_link,
@@ -121,6 +121,16 @@
         <result property="gender" column="gender" jdbcType="INTEGER" javaType="int"/>
         <result property="profile" column="profile" jdbcType="NVARCHAR" javaType="String"/>
         <result property="userId" column="user_id" jdbcType="NVARCHAR" javaType="String"/>
+    </resultMap>
+
+    <resultMap id="RecommendedUserResultMap" type="org.somemate.demo.user.dto.RecommendedUser">
+        <result property="idx" column="idx" jdbcType="INTEGER" javaType="int"/>
+        <result property="profile" column="profile" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="openchat_link" column="openchat_link" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="gender" column="gender" jdbcType="INTEGER" javaType="int"/>
+        <result property="name" column="name" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="desc" column="desc" jdbcType="NVARCHAR" javaType="String"/>
+        <result property="age" column="age" jdbcType="INTEGER" javaType="int"/>
     </resultMap>
 
 </mapper>

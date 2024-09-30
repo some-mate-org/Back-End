@@ -6,13 +6,13 @@ public class RecommendedUser {
     private String openchat_link;
     private String name;
     private int gender;
-    private String age;
+    private int age;
     private String mbti;
     private String desc;
 
     public RecommendedUser() {}
 
-    public RecommendedUser(int idx, String profile, String openchat_link, String name, int gender, String age, String mbti, String desc) {
+    public RecommendedUser(int idx, String profile, String openchat_link, String name, int gender, int age, String mbti, String desc) {
         this.idx = idx;
         this.profile = profile;
         this.openchat_link = openchat_link;
@@ -63,11 +63,11 @@ public class RecommendedUser {
         this.gender = gender;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
