@@ -175,6 +175,7 @@ public class UserController {
             map.put("mbti", mbti);
 
             recommendedUser = userService.getMatchedUserInfo(map);
+            System.out.println(recommendedUser.getOpenchat_link());
             return ResponseEntity.ok(recommendedUser);
         } catch (Exception e) {
             e.printStackTrace();
