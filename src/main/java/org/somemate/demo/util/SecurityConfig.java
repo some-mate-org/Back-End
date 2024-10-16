@@ -62,7 +62,7 @@ public class SecurityConfig {
                 "http://10.10.222.159:5173", //  네트워크 환경에서 접속하려는 IP 주소
                 "http://localhost:8080",
                 "http://192.168.219.177:5173",  // 네트워크 환경에서 접속하려는 IP 주소
-                "http://125.249.153.42:5173"     // 사용자의 공인 IP 주소 추가
+                "http://10.10.222.39:5173"     // 사용자의 공인 IP 주소 추가
         ));
 
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
