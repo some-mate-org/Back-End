@@ -16,7 +16,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/matching")
+@RequestMapping("/api/matching")
 public class HistoryController {
     private final JWTUtil jwtUtil;
     HistoryService historyService;
@@ -28,7 +28,7 @@ public class HistoryController {
         this.userService = userService;
     }
 
-    @GetMapping("/history")
+    @GetMapping("/api/history")
     public ResponseEntity<?> getHistory(HttpServletRequest request) {
         // Authorization 헤더에서 Bearer 토큰 추출
         String authorizationHeader = request.getHeader("Authorization");
@@ -55,7 +55,7 @@ public class HistoryController {
         }
     }
 
-    @PostMapping("/history/add")
+    @PostMapping("/api/history/add")
     public ResponseEntity<?> postMatchingHistory(HttpServletRequest request, @RequestBody Map<String, Integer> requestBody) {
         // Authorization 헤더에서 Bearer 토큰 추출
         String authorizationHeader = request.getHeader("Authorization");
@@ -83,7 +83,7 @@ public class HistoryController {
         }
     }
 
-    @DeleteMapping("/history/delete")
+    @DeleteMapping("/api/history/delete")
     public ResponseEntity<?> deleteMatchingHistory(
             HttpServletRequest request,
             @RequestParam("recommendedIdx") Integer recommendedIdx) {

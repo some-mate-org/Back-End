@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/questions")
+@RequestMapping("/api/questions")
 public class QuestionController {
     private final QuestionService questionService;
 
@@ -16,7 +16,7 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
-    @GetMapping("/{questionId}")
+    @GetMapping("/api/{questionId}")
     public Question getQuestionById(@PathVariable("questionId") int questionId) {
         try {
             return questionService.getQuestionById(questionId);

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/mbti")
+@RequestMapping("/api/mbti")
 public class MbtiController {
     MbtiService mbtiService;
 
