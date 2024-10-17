@@ -62,7 +62,7 @@ public class SecurityConfig {
                 "http://10.10.222.159:5173", //  네트워크 환경에서 접속하려는 IP 주소
                 "http://localhost:8080",
                 "http://192.168.219.177:5173",  // 네트워크 환경에서 접속하려는 IP 주소
-                "http://43.203.219.64" // 프론트엔드 URL
+                "http://43.203.219.64:80" // 프론트엔드 URL
         ));
 
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
