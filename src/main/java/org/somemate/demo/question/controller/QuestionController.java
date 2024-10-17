@@ -16,7 +16,7 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
-    @GetMapping("/api/{questionId}")
+    @GetMapping("/{questionId}")
     public Question getQuestionById(@PathVariable("questionId") int questionId) {
         try {
             return questionService.getQuestionById(questionId);

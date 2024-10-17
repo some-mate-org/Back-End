@@ -28,7 +28,7 @@ public class HistoryController {
         this.userService = userService;
     }
 
-    @GetMapping("/api/history")
+    @GetMapping("/history")
     public ResponseEntity<?> getHistory(HttpServletRequest request) {
         // Authorization 헤더에서 Bearer 토큰 추출
         String authorizationHeader = request.getHeader("Authorization");
@@ -55,7 +55,7 @@ public class HistoryController {
         }
     }
 
-    @PostMapping("/api/history/add")
+    @PostMapping("/history/add")
     public ResponseEntity<?> postMatchingHistory(HttpServletRequest request, @RequestBody Map<String, Integer> requestBody) {
         // Authorization 헤더에서 Bearer 토큰 추출
         String authorizationHeader = request.getHeader("Authorization");
@@ -83,7 +83,7 @@ public class HistoryController {
         }
     }
 
-    @DeleteMapping("/api/history/delete")
+    @DeleteMapping("/history/delete")
     public ResponseEntity<?> deleteMatchingHistory(
             HttpServletRequest request,
             @RequestParam("recommendedIdx") Integer recommendedIdx) {

@@ -34,7 +34,7 @@ public class UserController {
     }
 
     // 회원가입
-    @PostMapping("/api/register")
+    @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         System.out.println(user);
         try {
@@ -46,7 +46,7 @@ public class UserController {
     }
 
     // 회원가입 사용자 아이디 중복 체크
-    @GetMapping("/api/checkUserId")
+    @GetMapping("/checkUserId")
     public ResponseEntity<Boolean> checkUserId(@RequestParam String userId) {
         try {
             boolean isAvailable = userService.isUserIdAvailable(userId);
@@ -59,7 +59,7 @@ public class UserController {
     }
 
     // 로그인
-    @PostMapping("/api/login")
+    @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody User loginRequest) {
         try {
             System.out.println(loginRequest);
@@ -86,7 +86,7 @@ public class UserController {
     }
 
     // 사용자 개인 프로필 조회
-    @GetMapping("/api/profile")
+    @GetMapping("/profile")
     public ResponseEntity<?> getUserProfile(HttpServletRequest request) {
         try {
             // Authorization 헤더에서 Bearer 토큰 추출
@@ -124,7 +124,7 @@ public class UserController {
     }
 
     // 토큰 갱신
-    @PostMapping("/api/refresh")
+    @PostMapping("/refresh")
     public ResponseEntity<Map<String, Object>> refreshAccessToken(@RequestBody Map<String, String> tokenRequest) {
         String refreshToken = tokenRequest.get("refreshToken");
 
@@ -150,7 +150,7 @@ public class UserController {
     }
 
     // 특정 사용자의 정보를 조회하는 엔드포인트
-    @GetMapping("/api/getMatchedUserInfo")
+    @GetMapping("/getMatchedUserInfo")
     public ResponseEntity<?> getMatchedUserInfo(HttpServletRequest request) throws SQLException {
         try {
             // Authorization 헤더에서 Bearer 토큰 추출
