@@ -34,10 +34,10 @@ public class SecurityConfig {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration config = new CorsConfiguration();
-
-                        config.setAllowedOrigins(Collections.singletonList("*")); //테스트를 위해 일단 전체 허용
-                        config.setAllowedMethods(Collections.singletonList("*"));
-                        config.setAllowedHeaders(Collections.singletonList("*"));
+                        config.setAllowedOrigins(Collections.singletonList("http://43.203.219.64")); // 허용할 도메인 설정
+                        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 필요한 메서드 허용
+                        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); // 필요한 헤더 허용
+                        config.setAllowCredentials(true); // 자격 증명 허용
                         return config;
                     }
                 }))
