@@ -1,5 +1,6 @@
 package org.somemate.demo.util;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.somemate.demo.user.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,10 +9,12 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -26,7 +29,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS 설정
+//                .cors(cors -> cors.configurationSource (corsConfigurationSource())) // CORS 설정
+                .cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
+                    @Override
+                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                        CorsConfiguration config = new CorsConfiguration();
+
+                        config.setAllowedOrigins(Collections.singletonList("*")); //테스트를 위해 일단 전체 허용
+                        config.setAllowedMethods(Collections.singletonList("*"));
+                        config.setAllowedHeaders(Collections.singletonList("*"));
+                        return config;
+                    }
+                }))
                 .csrf(csrf -> csrf.disable())    // CSRF 비활성화
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
@@ -52,27 +66,27 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-
-        // 여러 도메인에서 접근 가능하도록 설정
-        corsConfiguration.setAllowedOrigins(List.of(
-                "http://localhost:5173",   // 개발 환경
-                "http://10.10.222.159:5173", //  네트워크 환경에서 접속하려는 IP 주소
-                "http://localhost:8080",
-                "http://192.168.219.177:5173",  // 네트워크 환경에서 접속하려는 IP 주소
-                "http://43.203.219.64:80" // 프론트엔드 URL
-        ));
-
-        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        corsConfiguration.setAllowedHeaders(List.of("*"));
-        corsConfiguration.setAllowCredentials(true); // 자격 증명 허용
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration);
-        return source;
-    }
+//    @Bean
+//    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration corsConfiguration = new CorsConfiguration();
+//
+//        // 여러 도메인에서 접근 가능하도록 설정
+//        corsConfiguration.setAllowedOrigins(List.of(
+//                "http://localhost:5173",   // 개발 환경
+//                "http://10.10.222.159:5173", //  네트워크 환경에서 접속하려는 IP 주소
+//                "http://localhost:8080",
+//                "http://192.168.219.177:5173",  // 네트워크 환경에서 접속하려는 IP 주소
+//                "http://43.203.219.64:80" // 프론트엔드 URL
+//        ));
+//
+//        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+//        corsConfiguration.setAllowedHeaders(List.of("*"));
+//        corsConfiguration.setAllowCredentials(true); // 자격 증명 허용
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", corsConfiguration);
+//        return source;
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
