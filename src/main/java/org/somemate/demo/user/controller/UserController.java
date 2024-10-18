@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 public class UserController {
     private final UserService userService;
     private final JWTUtil jwtUtil;

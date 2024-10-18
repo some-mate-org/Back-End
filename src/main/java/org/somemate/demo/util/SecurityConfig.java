@@ -44,17 +44,17 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())    // CSRF 비활성화
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/questions/**",
-                                "/api/user/checkUserId",
-                                "/api/user/login",
-                                "/api/user/register",
-                                "/api/user/getMatchedUserInfo/**",
-                                "/api/mbti/**",
-                                "/api/matching/history/**",
-                                "/api/user/updateUserMbti",
+                                "/questions/**",
+                                "/user/checkUserId",
+                                "/user/login",
+                                "/user/register",
+                                "/user/getMatchedUserInfo/**",
+                                "/mbti/**",
+                                "/matching/history/**",
+                                "/user/updateUserMbti",
                                 //"/user/refresh" // 토큰 갱신 경로 추가
-                                "/api/user/updateUserMbti",
-                                "/api/user/refresh" // 토큰 갱신 경로 추가
+                                "/user/updateUserMbti",
+                                "/user/refresh" // 토큰 갱신 경로 추가
                         ).permitAll() // 인증 없이 접근 가능한 경로
                         .requestMatchers("/myprofile").authenticated()
                         .anyRequest().authenticated() // 나머지 요청은 인증 필요
