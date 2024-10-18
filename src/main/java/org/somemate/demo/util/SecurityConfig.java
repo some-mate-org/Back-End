@@ -34,7 +34,7 @@ public class SecurityConfig {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOrigins(Collections.singletonList("http://43.203.219.64")); // 허용할 도메인 설정
+                        config.setAllowedOrigins(Arrays.asList("http://43.203.219.64", "http://localhost:5173")); // 허용할 도메인 설정
                         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 필요한 메서드 허용
                         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); // 필요한 헤더 허용
                         config.setAllowCredentials(true); // 자격 증명 허용
@@ -44,19 +44,19 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())    // CSRF 비활성화
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/questions/**",
-                                "/user/checkUserId",
-                                "/user/login",
-                                "/user/register",
-                                "/user/getMatchedUserInfo/**",
-                                "/mbti/**",
-                                "/matching/history/**",
-                                "/user/updateUserMbti",
+                                "/api/questions/**",
+                                "/api/user/checkUserId",
+                                "/api/user/login",
+                                "/api/user/register",
+                                "/api/user/getMatchedUserInfo/**",
+                                "/api/mbti/**",
+                                "/api/matching/history/**",
+                                "/api/user/updateUserMbti",
                                 //"/user/refresh" // 토큰 갱신 경로 추가
-                                "/user/updateUserMbti",
-                                "/user/refresh" // 토큰 갱신 경로 추가
+                                "/api/user/updateUserMbti",
+                                "/api/user/refresh" // 토큰 갱신 경로 추가
                         ).permitAll() // 인증 없이 접근 가능한 경로
-                        .requestMatchers("/mainuser").authenticated()
+                        .requestMatchers("/myprofile").authenticated()
                         .anyRequest().authenticated() // 나머지 요청은 인증 필요
                 )
                 .addFilterAfter(new JWTAuthenticationFilter(jwtUtil), CorsFilter.class) // CORS 필터 다음에 JWT 필터 추가
